@@ -7,7 +7,7 @@ import { EmailComponent } from './components/email/email.component';
 import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: UserListComponent },
+  { path: '', component: LoginComponent },
   { path: 'users', component: UserListComponent },
   { path: 'user/:id', component: UserDetailsComponent },
   { path: 'add', component: AddUserComponent },

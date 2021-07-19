@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
-const usersUrl = 'http://localhost:8080/users';
-const emailUrl = 'http://localhost:8080/email';
+const baseUrl = 'http://localhost:8080';
+const usersUrl = baseUrl + '/users';
+const emailUrl = baseUrl + '/email';
+const tokenUrl = baseUrl + '/token';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
   private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
-  login(loginPayload : any)  {
-    return this.http.post('http://localhost:8080/' + 'token/generate-token', loginPayload);
+  login(userLogin : any)  {
+    return this.http.post(tokenUrl, userLogin, this.options);
   }
 
   getAllUsers() {
