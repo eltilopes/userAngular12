@@ -1,5 +1,7 @@
 .error{
-    color: #0026ff;
+    color: #ca4c61;
+    margin: auto;
+    display: flex;
   }
   .login-container {
     display: flex;

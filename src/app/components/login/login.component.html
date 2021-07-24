@@ -1,7 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng2-bootstrap/x.x.x/ng2-bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 <div class="row">
     <div class="col-md-6 login-container">
       <h2 style="margin: auto">Login</h2>
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Usuário:</label>
           <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off">
@@ -12,8 +15,8 @@
           <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off">
           <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
         </div>
-        <button class="btn btn-success" [disabled]="loginForm.invalid">Entrar</button>
-        <div *ngIf="invalidLogin" class="error">
+        <button class="btn btn-success" >Entrar</button> 
+        <div *ngIf="invalidLogin"  class="error">
           <div>Credenciais Inválidas.</div>
         </div>
       </form>

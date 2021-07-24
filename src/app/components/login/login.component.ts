@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   invalidLogin: boolean = false;
-  constructor( private formBuilder: FormBuilder, private router: Router, private apiService: UserService) {  }
+  constructor( private formBuilder: FormBuilder, private router: Router, private apiService: AuthService) {  }
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -21,16 +22,21 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
     }
-    this.apiService.login(loginPayload).subscribe((data: any)  => {
-      debugger;
-      if(data.status === 200) {
-        window.localStorage.setItem('token', data.result.token);
-        this.router.navigate(['list-user']);
-      }else {
+      this.apiService.attemptAuth(loginPayload).subscribe(
+        (data: any)  => {
+        if(data && data.status === 200) {
+          window.localStorage.setItem('token', data.result.token);
+          this.router.navigate(['users']);
+        }else {
+          this.invalidLogin = true;
+          alert(data.message);
+        }    
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
         this.invalidLogin = true;
-        alert(data.message);
-      }
-    });
+      });
+   
   }
 
   ngOnInit() {
