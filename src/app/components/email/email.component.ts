@@ -8,13 +8,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EmailComponent implements OnInit {
   email = {
-    message: ''
+    message: '',
+    sendTo: '',
+    fromTo: ''
   }
   submitted = false;
 
   constructor(private userService: UserService ) { }
 
   ngOnInit(): void {
+   
+    if( window.localStorage.getItem("emailSendTo")){
+      this. email = {
+        message: '',
+        sendTo: window.localStorage.getItem("emailSendTo")!,
+        fromTo: 'userSpringBoot@gmail.com'
+      }
+    }
   }
 
   sendEmail() {
@@ -33,7 +43,9 @@ export class EmailComponent implements OnInit {
   newMessage() {
     this.submitted = false;
     this.email ={
-      message: ''
+      message: '',
+      sendTo:'lalaland@gmail.com',
+      fromTo:''
     }
   }
 }

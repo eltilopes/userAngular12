@@ -4,7 +4,9 @@
 
 
   <div class="col-md-12 user-container">
-    <button class="btn btn-primary" style="margin-left: 930px;" (click)="addUser()">Novo Usuário</button>
+    
+    <button class="btn btn-success"  style="margin-left: 760px;" (click)="addUser()">Novo Usuário</button>
+    <button class="btn btn-primary" style="margin-left: 30px;" (click)="sendEmailAdmin()">Enviar E-mail *</button>
     <table class="table table-striped">
       <thead>
       <tr>
@@ -24,9 +26,13 @@
         <td>{{user.createDate | date:"dd/MM/yyyy hh:mm:ss"}}</td>
         <td>{{user.updateDate | date:"dd/MM/yyyy hh:mm:ss"}}</td>
         <td>{{user.admin ? "SIM":"NÃO"}}</td>
-        <td><button class="btn btn-danger"  (click)="deleteUser(user)" >Remover</button>
-          <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;">Editar</button></td>
+        <td>
+          <button class="btn btn-danger"  (click)="deleteUser(user)" >Remover</button>
+          <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;">Editar</button>
+          <button class="btn btn-primary" (click)="sendEmail(user)" style="margin-left: 20px;">Enviar E-mail</button>
+        </td>
       </tr>
       </tbody>
     </table>
+    
   </div>

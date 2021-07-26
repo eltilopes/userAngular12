@@ -39,6 +39,15 @@ export class UserListComponent implements OnInit {
     this.currentUser = user;
     this.currentIndex = index;
   }
+  sendEmailAdmin() : void {
+    window.localStorage.removeItem("emailSentTo");
+    this.router.navigate(['email']);
+  } 
+  sendEmail(user: any) : void {
+    window.localStorage.removeItem("emailSentTo");
+    window.localStorage.setItem("emailSendTo", user.email.toString());
+    this.router.navigate(['email']);
+  } 
   
   addUser(): void {
     window.localStorage.removeItem("editUserId");
